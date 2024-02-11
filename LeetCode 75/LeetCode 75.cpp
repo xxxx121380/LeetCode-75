@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <vector>
+#include <sstream>
 using namespace std;
 class Solution {
 public:
@@ -25,12 +27,60 @@ public:
         }
         return word;
     }
+
+    string reverseWords_1(string s) {
+        vector<string> temp;
+        size_t pos = 0;
+        string tempS="";
+        string result = "";
+        while (pos < s.length())
+        {
+            if (s[pos] != ' ')
+            {
+                tempS += s[pos];
+            }
+            else
+            {
+                if (tempS != "") {
+                    temp.push_back(tempS);
+                    tempS = "";
+                }
+            }
+            pos++;
+        }
+        if (tempS!="")temp.push_back(tempS);
+        for (int i = temp.size() - 1; i > 0; i--) {
+            result.append(temp[i]);
+            result.append(" ");
+        }
+        result.append(temp[0]);
+        return result;
+    }
+    string reverseWords_2(string s) {
+
+        std::istringstream iss(s);
+        std::vector<string> words;
+        std::string word;
+
+        // 使用istringstream分割单词，自动处理多个空格问题
+        while (iss >> word) {
+            words.push_back(word);
+        }
+        std::reverse(words.begin(), words.end());
+        string result;
+        if (!words.empty()) {
+            result = words[0];
+            for (size_t i = 1; i < words.size(); ++i) {
+                result += " " + words[i];
+            }
+        }
+        return result;
+    }
 };
 int main()
 {
     std::cout << "Hello World!\n";
     Solution test;
-
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
