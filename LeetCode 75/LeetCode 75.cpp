@@ -2,10 +2,35 @@
 //
 
 #include <iostream>
-
+#include <string>
+#include <cmath>
+using namespace std;
+class Solution {
+public:
+    string mergeAlternately(string word1, string word2) {
+        string word = "";
+        word.reserve(word1.length() + word2.length());
+        int minLength = min(word1.length(), word2.length());
+        for (int i = 0; i < minLength; i++) {
+            word += word1[i];
+            word += word2[i];
+        }
+        if (word1.length() < word2.length()) {
+            string temp = word2.substr(word1.length());
+            word.append(temp);
+        }
+        else {
+            string temp = word1.substr(word2.length());
+            word.append(temp);
+        }
+        return word;
+    }
+};
 int main()
 {
     std::cout << "Hello World!\n";
+    Solution test;
+
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
