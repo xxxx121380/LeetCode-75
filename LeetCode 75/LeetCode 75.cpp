@@ -6,6 +6,7 @@
 #include <cmath>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 using namespace std;
 class Solution {
 public:
@@ -27,7 +28,20 @@ public:
         }
         return word;
     }
-
+    vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
+        auto maxC = max_element(candies.begin(), candies.end());
+        vector<bool> result;
+        for (int i = 0; i < candies.size(); i++) {
+            bool temp;
+            if (candies[i] + extraCandies >= *maxC) {
+                temp = true;
+            }
+            else
+                temp = false;
+            result.push_back(temp);
+        }
+        return result;
+    }
     string reverseWords_1(string s) {
         vector<string> temp;
         size_t pos = 0;
