@@ -76,11 +76,29 @@ public:
         }
         return result;
     }
+
+    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
+        vector<int> newF = { 0 };
+        newF.insert(newF.end(),flowerbed.begin(), flowerbed.end());
+        newF.push_back(0);
+        int t = 0;
+        for (int i = 1; i <= newF.size()-1; i++) {
+            int temp = newF[i - 1] + newF[i] + newF[i + 1];
+            if (temp == 0) {
+                t++;
+                newF[i] = 1;
+            }
+            if (t >= n)return true;
+        }
+        return false;
+    }
 };
 int main()
 {
     std::cout << "Hello World!\n";
     Solution test;
+    vector<int> t = { 1,0,0,0,0 };
+    test.canPlaceFlowers(t, 2);
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
