@@ -10,6 +10,7 @@
 using namespace std;
 class Solution {
 public:
+    //Q1 LC1768
     string mergeAlternately(string word1, string word2) {
         string word = "";
         word.reserve(word1.length() + word2.length());
@@ -28,6 +29,7 @@ public:
         }
         return word;
     }
+    //Q3 LC1431
     vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
         auto maxC = max_element(candies.begin(), candies.end());
         vector<bool> result;
@@ -42,6 +44,25 @@ public:
         }
         return result;
     }
+
+    //Q4 LC605
+    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
+        vector<int> newF = { 0 };
+        newF.insert(newF.end(), flowerbed.begin(), flowerbed.end());
+        newF.push_back(0);
+        int t = 0;
+        for (int i = 1; i <= newF.size() - 1; i++) {
+            int temp = newF[i - 1] + newF[i] + newF[i + 1];
+            if (temp == 0) {
+                t++;
+                newF[i] = 1;
+            }
+            if (t >= n)return true;
+        }
+        return false;
+    }
+
+    //Q5 LC345
     string reverseWords_1(string s) {
         vector<string> temp;
         size_t pos = 0;
@@ -71,7 +92,6 @@ public:
         return result;
     }
     string reverseWords_2(string s) {
-
         std::istringstream iss(s);
         std::vector<string> words;
         std::string word;
@@ -91,6 +111,7 @@ public:
         return result;
     }
 
+    //Q6 LC151
     string reverseVowels(string s) {
         vector<char> temp;
         for (int i = 0; i < s.length(); i++) {
@@ -109,22 +130,7 @@ public:
         return s;
     }
 
-    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
-        vector<int> newF = { 0 };
-        newF.insert(newF.end(),flowerbed.begin(), flowerbed.end());
-        newF.push_back(0);
-        int t = 0;
-        for (int i = 1; i <= newF.size()-1; i++) {
-            int temp = newF[i - 1] + newF[i] + newF[i + 1];
-            if (temp == 0) {
-                t++;
-                newF[i] = 1;
-            }
-            if (t >= n)return true;
-        }
-        return false;
-    }
-
+    //Q7 LC238
     vector<int> productExceptSelf(vector<int>& nums) {
         vector<int>left;
         vector<int>right;
@@ -143,6 +149,8 @@ public:
         return result;
     }
 
+
+    //Q18 LC1732
     int largestAltitude(vector<int>& gain) {
         int temp = gain[0];
         int max = 0 > temp ? 0 : temp;
