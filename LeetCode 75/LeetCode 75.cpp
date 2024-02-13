@@ -142,6 +142,16 @@ public:
         }
         return result;
     }
+
+    int largestAltitude(vector<int>& gain) {
+        int temp = gain[0];
+        int max = 0 > temp ? 0 : temp;
+        for (int i = 1; i <= gain.size() - 1; i++) {
+            temp += gain[i];
+            if (temp > max)max = temp;
+        }
+        return max;
+    }
 };
 int main()
 {
