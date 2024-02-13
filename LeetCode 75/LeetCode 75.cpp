@@ -124,13 +124,31 @@ public:
         }
         return false;
     }
+
+    vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int>left;
+        vector<int>right;
+        vector<int>result;
+        left.push_back(1);
+        right.push_back(1);
+        int l = nums.size() - 1;
+        for (int i = 0; i < l; i++) {
+            left.push_back(left[i] * nums[i]);
+            right.push_back(right[i] * nums[l - i]);
+        }
+        for (int i = 0; i <= l; i++)
+        {
+            result.push_back(left[i] * right[l - i]);
+        }
+        return result;
+    }
 };
 int main()
 {
     std::cout << "Hello World!\n";
     Solution test;
-    vector<int> t = { 1,0,0,0,0 };
-    test.canPlaceFlowers(t, 2);
+    vector<int> t = { 1,2,3,4 };
+    vector<int> r = test.productExceptSelf(t);
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
