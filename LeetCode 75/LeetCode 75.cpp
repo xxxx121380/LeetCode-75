@@ -245,6 +245,23 @@ public:
         }
         return chars.size();
     }
+    //Q10 LC283 
+    void moveZeroes(vector<int>& nums) {
+        int left = 0;
+        int right = 1;
+        while (right < nums.size() && left < nums.size()) {
+            if (nums[right] == 0)right++;
+            else
+            {
+                if (nums[left] == 0) {
+                    nums[left] = nums[right];
+                    nums[right] = 0;
+                }
+                left++;
+                if (nums[right] == 0||right<left)right++;
+            }
+        }
+    }
 
     //Q18 LC1732
     int largestAltitude(vector<int>& gain) {
@@ -260,8 +277,8 @@ public:
 int main()
 {
     Solution test;
-    vector<char> t = { 'a','a','a','a','a','a','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','c','c','c','c','c','c','c','c','c','c','c','c','c','c' };
-    test.compress(t);
+    vector<int> nums = { 4,2,4,0,0,3,0,5,1,0 };
+    test.moveZeroes(nums);
  }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
