@@ -262,7 +262,23 @@ public:
             }
         }
     }
-
+    //Q11 LC392
+    bool isSubsequence(string s, string t) {
+        if (s == "")return true;
+        if (s != "" && t == "")return false;
+        int l1 = 0, l2 = 0;
+        while (l2 < t.length()) {
+            if (s[l1] == t[l2]) {
+                if (l1 == s.length() - 1)return true;
+                l1++;
+                l2++;
+            }
+            else {
+                l2++;
+            }
+        }
+        return false;
+    }
     //Q18 LC1732
     int largestAltitude(vector<int>& gain) {
         int temp = gain[0];
@@ -278,7 +294,8 @@ int main()
 {
     Solution test;
     vector<int> nums = { 4,2,4,0,0,3,0,5,1,0 };
-    test.moveZeroes(nums);
+    string s1 = "axc", s2 = "ahbgdc";
+    test.isSubsequence(s1,s2);
  }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
