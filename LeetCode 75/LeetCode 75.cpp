@@ -29,6 +29,37 @@ public:
         }
         return word;
     }
+    //Q2 LC1071 
+    string gcdOfStrings(string str1, string str2) {
+        string temp = "";
+        string result = "";
+        if (str1.length() <= str2.length())
+        {
+            temp = str1;
+        }
+        else temp = str2;
+        for (int i = 1; i <= temp.length(); i++) {
+            bool flag = true;
+            string tempResult = temp.substr(0, i);
+            for (int j = 0; j < str1.length(); j += i) {
+                if (j + i > str1.length() || str1.substr(j, i) != tempResult) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag == false)continue;
+            for (int j = 0; j < str2.length(); j += i) {
+                if (j + i > str2.length() || str2.substr(j, i) != tempResult) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag == false)continue;
+            result = tempResult;
+        }
+        return result;
+    }
+
     //Q3 LC1431
     vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
         auto maxC = max_element(candies.begin(), candies.end());
@@ -148,8 +179,31 @@ public:
         }
         return result;
     }
-
-
+    //Q8 LC334
+    bool increasingTriplet(vector<int>& nums) {
+        if (nums.size() < 3)return false;
+        int amin = INT_MAX;
+        for (int i = 0; i < nums.size() - 2; i++) {
+            if (nums[i] < amin) {
+                amin = nums[i];
+                int bmin = INT_MAX;
+                for (int j = i + 1; j < nums.size() - 1; j++) {
+                    if (nums[j] > amin && nums[j] < bmin) {
+                        bmin = nums[j];
+                        if (nums[i] < nums[j]) {
+                            for (int k = j + 1; k < nums.size(); k++) {
+                                if (nums[j] < nums[k])
+                                    return true;
+                            }
+                        }
+                    }
+                    else continue;
+                }
+            }
+            else continue;
+        }
+        return false;
+    }
     //Q18 LC1732
     int largestAltitude(vector<int>& gain) {
         int temp = gain[0];
@@ -163,11 +217,10 @@ public:
 };
 int main()
 {
-    std::cout << "Hello World!\n";
     Solution test;
-    vector<int> t = { 1,2,3,4 };
-    vector<int> r = test.productExceptSelf(t);
-}
+    vector<int> t = { 1,5,0,4,1,3 };
+    test.increasingTriplet(t);
+ }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
