@@ -204,6 +204,48 @@ public:
         }
         return false;
     }
+    //Q9 LC443
+    int compress(vector<char>& chars) {
+        int i = 0;
+        char temp = chars[0];
+        int repeat = 0;
+        while (i < chars.size()-1) {
+            if (temp == chars[i+1]) {
+                i++;
+                repeat++;
+            }
+            else {
+                if (repeat == 0) {
+                    temp = chars[i + 1];
+                    i++;
+                }
+                else {
+                    temp = chars[i+1];
+                    i = i - repeat + 1;
+                    chars.erase(chars.begin() + i, chars.begin() + i +repeat);
+                    string nums = to_string(repeat+1);
+                    for (int j = 0; j < nums.length(); j++) {
+                        chars.insert(chars.begin() + i, nums[j]);
+                        i++;
+                    }
+                    //i = i - 1;
+                    repeat = 0;
+                }
+            }
+        }
+        if (repeat > 0)
+        {
+            i = i - repeat + 1;
+            chars.erase(chars.begin() + i, chars.begin() + i + repeat);
+            string nums = to_string(repeat + 1);
+            for (int j = 0; j < nums.length(); j++) {
+                chars.insert(chars.begin() + i, nums[j]);
+                i++;
+            }
+        }
+        return chars.size();
+    }
+
     //Q18 LC1732
     int largestAltitude(vector<int>& gain) {
         int temp = gain[0];
@@ -218,8 +260,8 @@ public:
 int main()
 {
     Solution test;
-    vector<int> t = { 1,5,0,4,1,3 };
-    test.increasingTriplet(t);
+    vector<char> t = { 'a','a','a','a','a','a','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','c','c','c','c','c','c','c','c','c','c','c','c','c','c' };
+    test.compress(t);
  }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
