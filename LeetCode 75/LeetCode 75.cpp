@@ -279,6 +279,24 @@ public:
         }
         return false;
     }
+    //Q12 LC11
+    
+    //Q14 LC643
+    double findMaxAverage(vector<int>& nums, int k) {
+        int length = nums.size();
+        double result = 0.0;
+        for (int i = 0; i < k; i++) {
+            result += nums[i];
+        }
+        double max = result;
+        for (int i = 0; i < length - k; i++) {
+            result = result - nums[i] + nums[i + k];
+            if (max < result)
+                max = result;
+        }
+        return max / k;
+    }
+    
     //Q18 LC1732
     int largestAltitude(vector<int>& gain) {
         int temp = gain[0];
@@ -293,9 +311,9 @@ public:
 int main()
 {
     Solution test;
-    vector<int> nums = { 4,2,4,0,0,3,0,5,1,0 };
+    vector<int> nums = { 0,4,0,3,2 };
     string s1 = "axc", s2 = "ahbgdc";
-    test.isSubsequence(s1,s2);
+    test.findMaxAverage(nums,1);
  }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
