@@ -280,7 +280,27 @@ public:
         return false;
     }
     //Q12 LC11
-    
+    int maxArea(vector<int>& height) {
+        int left = 0, right = height.size()-1;
+        int max = (right - left) * min(height[right], height[left]);
+        while (left < right) {
+            int l = height[left];
+            int r = height[right];
+            if (l <= r) {
+                left++;
+                if (max < (right - left) * min(r, height[left])) {
+                    max = (right - left) * min(r, height[left]);
+                }
+            }
+            else {
+                right--;
+                if (max < (right - left) * min(height[right], l)) {
+                    max = (right - left) * min(height[right], l);
+                }
+            }
+        }
+        return max;
+    }
     //Q14 LC643
     double findMaxAverage(vector<int>& nums, int k) {
         int length = nums.size();
@@ -311,9 +331,9 @@ public:
 int main()
 {
     Solution test;
-    vector<int> nums = { 0,4,0,3,2 };
+    vector<int> nums = { 1,3,2,5,25,24,5 };
     string s1 = "axc", s2 = "ahbgdc";
-    test.findMaxAverage(nums,1);
+    test.maxArea(nums);
  }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
