@@ -301,6 +301,29 @@ public:
         }
         return max;
     }
+    //Q13 LC1679
+    int maxOperations(vector<int>& nums, int k) {
+        if (nums.size() == 1)return 0;
+        sort(nums.begin(), nums.end());
+        auto right = nums.size() - 1;
+        auto left = 0;
+        int result = 0;
+        while (nums.size() > 1 && right > left) {
+            if (nums[left] + nums[right] == k) {
+                left++;
+                right--;
+                result++;
+            }
+            else  if (nums[left] + nums[right] > k) {
+                right--;
+            }
+            else  if (nums[left] + nums[right] < k) {
+                left++;
+            }
+        }
+        return result;
+
+    }
     //Q14 LC643
     double findMaxAverage(vector<int>& nums, int k) {
         int length = nums.size();
@@ -331,9 +354,9 @@ public:
 int main()
 {
     Solution test;
-    vector<int> nums = { 1,3,2,5,25,24,5 };
+    vector<int> nums = { 3,1,3,4,3 };
     string s1 = "axc", s2 = "ahbgdc";
-    test.maxArea(nums);
+    test.maxOperations(nums,6);
  }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
