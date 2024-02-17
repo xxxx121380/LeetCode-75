@@ -340,7 +340,17 @@ public:
         }
         return max / k;
     }
-    //Q15 LC724
+    //Q18 LC1732
+    int largestAltitude(vector<int>& gain) {
+        int temp = gain[0];
+        int max = 0 > temp ? 0 : temp;
+        for (int i = 1; i <= gain.size() - 1; i++) {
+            temp += gain[i];
+            if (temp > max)max = temp;
+        }
+        return max;
+    }
+    //Q19 LC724
     int pivotIndex(vector<int>& nums) {
         if (nums.size() == 1)  return 0;
         int right = std::accumulate(nums.begin() + 1, nums.end(), 0);
@@ -356,16 +366,6 @@ public:
             }
         }
         return -1;
-    }
-    //Q18 LC1732
-    int largestAltitude(vector<int>& gain) {
-        int temp = gain[0];
-        int max = 0 > temp ? 0 : temp;
-        for (int i = 1; i <= gain.size() - 1; i++) {
-            temp += gain[i];
-            if (temp > max)max = temp;
-        }
-        return max;
     }
 };
 int main()
