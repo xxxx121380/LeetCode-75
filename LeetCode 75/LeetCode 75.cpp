@@ -7,6 +7,7 @@
 #include <vector>
 #include <sstream>
 #include <algorithm>
+#include <numeric> 
 using namespace std;
 class Solution {
 public:
@@ -339,7 +340,23 @@ public:
         }
         return max / k;
     }
-    
+    //Q15 LC724
+    int pivotIndex(vector<int>& nums) {
+        if (nums.size() == 1)  return 0;
+        int right = std::accumulate(nums.begin() + 1, nums.end(), 0);
+        int left = 0;
+        int result = 0;
+        nums.push_back(0);
+        while (result < nums.size() - 1) {
+            if (left == right)return result;
+            else {
+                right -= nums[result + 1];
+                left += nums[result];
+                result++;
+            }
+        }
+        return -1;
+    }
     //Q18 LC1732
     int largestAltitude(vector<int>& gain) {
         int temp = gain[0];
@@ -354,9 +371,9 @@ public:
 int main()
 {
     Solution test;
-    vector<int> nums = { 3,1,3,4,3 };
+    vector<int> nums = { 2,5 };
     string s1 = "axc", s2 = "ahbgdc";
-    test.maxOperations(nums,6);
+    test.pivotIndex(nums);
  }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
