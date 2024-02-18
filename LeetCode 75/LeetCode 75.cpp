@@ -8,6 +8,7 @@
 #include <sstream>
 #include <algorithm>
 #include <numeric> 
+#include <stack>
 using namespace std;
 class Solution {
 public:
@@ -366,6 +367,26 @@ public:
             }
         }
         return -1;
+    }
+    //Q24 LC2390
+    string removeStars(string s) {
+        string result0 = "";
+        stack<char> result;
+        for (int i = 0; i < s.length(); i++) {
+            if (s[i] != '*')
+            {
+                result.push(s[i]);
+            }
+            else {
+                result.pop();
+            }
+        }
+        while (!result.empty()) {
+            result0+=result.top();
+            result.pop();
+        }
+        reverse(result0.begin(), result0.end());
+        return result0;
     }
 };
 int main()
