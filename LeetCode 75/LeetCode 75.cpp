@@ -388,6 +388,39 @@ public:
         reverse(result0.begin(), result0.end());
         return result0;
     }
+    //Q25 LC735
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        stack<int> result0;
+        vector<int> result;
+        for (int i = 0; i < asteroids.size(); i++) {
+            //非空并且异向  里面的往右，外面的往左，判断怎么炸
+            while (true) {
+                if (result0.empty() || result0.top() < 0 || (result0.top()>0&& asteroids[i] > 0)) {
+                    result0.push(asteroids[i]);
+                    break;
+                }
+                //里面大，炸外面
+                if (result0.top() > -asteroids[i]) {
+                    break;
+                }
+                //里面小，炸里面
+                else if (result0.top() < -asteroids[i]) {
+                    result0.pop();
+                }
+                //一样大，都炸了然后继续
+                else {
+                    result0.pop();
+                    break;
+                }
+            }
+        }
+        result.resize(result0.size());
+        for (int i = result.size() - 1; i >= 0; --i) {
+            result[i] = result0.top();
+            result0.pop();
+        }
+        return result;
+    }
 };
 int main()
 {
